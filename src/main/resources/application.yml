@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: prepaid-messaging
+  datasource:
+    url: jdbc:postgresql://localhost:5432/prepaid_db
+    username: prepaid
+    password: prepaid
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true
+  flyway:
+    enabled: true
+  mvc:
+    problemdetails:
+      enabled: true
+
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info

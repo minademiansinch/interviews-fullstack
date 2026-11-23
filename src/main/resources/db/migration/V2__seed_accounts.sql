@@ -1,0 +1,51 @@
+INSERT INTO accounts (id, name, available_balance_cents, reserved_balance_cents, version)
+VALUES
+    ('acct-acme-prod',     'Acme Messaging Prod',    5000,    0,   0),
+    ('acct-low-balance',   'Low Balance Startup',    15,      0,   0),
+    ('acct-zero-balance',  'Empty Prepaid Account',  0,       0,   0),
+    ('acct-high-volume',   'Flash Sale Enterprise',  1000000, 500, 3);
+
+INSERT INTO reservations (
+    id, account_id, recipient, body, segments, idempotency_key, payload_hash,
+    amount_cents, status, carrier_message_id, expires_at, created_at, updated_at
+)
+VALUES
+    ('11111111-1111-1111-1111-111111111111',
+     'acct-high-volume',
+     '+46700000001',
+     'Flash sale starts in 10 minutes!',
+     1,
+     'seed-key-1',
+     'seed-hash-1',
+     500,
+     'SENT',
+     'carrier-msg-001',
+     now() + interval '10 minutes',
+     now() - interval '2 minutes',
+     now() - interval '2 minutes'),
+    ('22222222-2222-2222-2222-222222222222',
+     'acct-high-volume',
+     '+46700000002',
+     'Your verification code is 492011.',
+     1,
+     'seed-key-2',
+     'seed-hash-2',
+     100,
+     'DELIVERED',
+     'carrier-msg-002',
+     now() + interval '10 minutes',
+     now() - interval '15 minutes',
+     now() - interval '14 minutes'),
+    ('33333333-3333-3333-3333-333333333333',
+     'acct-high-volume',
+     '+46700000003',
+     'Order #88412 failed carrier validation',
+     1,
+     'seed-key-3',
+     'seed-hash-3',
+     100,
+     'REFUNDED',
+     'carrier-msg-003',
+     now() + interval '10 minutes',
+     now() - interval '30 minutes',
+     now() - interval '29 minutes');

@@ -1,0 +1,17 @@
+proc_list_width: 22
+procs:
+  postgres:
+    shell: exec docker compose up
+    stop: SIGINT
+  app:
+    shell: exec ./scripts/run-app.sh
+    stop: SIGINT
+  tests:
+    shell: exec ./scripts/run-tests.sh
+    stop: SIGTERM
+  psql:
+    shell: exec ./scripts/run-psql.sh
+    stop: SIGKILL
+  shell:
+    shell: exec zsh
+    stop: SIGKILL
